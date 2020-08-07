@@ -6,7 +6,15 @@ public class MouseDragObject : MonoBehaviour
   private Camera currentCamera;
   private new Rigidbody rigidbody;
   private Vector3 screenPoint;
-  private Vector3 offset;
+  private Vector3 positionOffset;
+  private Quaternion rotationOffset;
+
+  private Vector3 velocity;
+  private Vector3 oldPosition;
+  private Vector3 newPosition;
+  private Quaternion newRotation;
+
+  private 
 
   void Awake()
   {
@@ -18,23 +26,38 @@ public class MouseDragObject : MonoBehaviour
     currentCamera = FindCamera();
     if (currentCamera != null)
     {
-      screenPoint = currentCamera.WorldToScreenPoint(gameObject.transform.position);
-      offset = gameObject.transform.position - currentCamera.ScreenToWorldPoint(GetMousePosWithScreenZ(screenPoint.z));
+      screenPoint = currentCamera.WorldToScreenPoint(rigidbody.position);
+      positionOffset = Quaternion.Inverse(currentCamera.transform.rotation) * (rigidbody.position - currentCamera.ScreenToWorldPoint(GetMousePosWithScreenZ(screenPoint.z)));
+      rotationOffset = Quaternion.Inverse(currentCamera.transform.rotation) * rigidbody.rotation;
     }
   }
 
   void OnMouseUp()
   {
     currentCamera = null;
+    rigidbody.velocity = Vector3.ClampMagnitude(velocity * 10f, 5f);
+  }
+
+  void Update()
+  {
+    if (currentCamera != null)
+    {
+      Vector3 currentScreenPoint = GetMousePosWithScreenZ(screenPoint.z);
+      oldPosition = newPosition;
+      newPosition = currentCamera.transform.rotation * positionOffset + currentCamera.ScreenToWorldPoint(currentScreenPoint);
+      velocity = newPosition - oldPosition;
+      newRotation = currentCamera.transform.rotation * rotationOffset;
+    }
   }
 
   void FixedUpdate()
   {
     if (currentCamera != null)
     {
-      Vector3 currentScreenPoint = GetMousePosWithScreenZ(screenPoint.z);
-      rigidbody.velocity = Vector3.zero;
-      rigidbody.MovePosition(currentCamera.ScreenToWorldPoint(currentScreenPoint) + offset);
+      rigidbody.angularVelocity = Vector3.zero;
+      rigidbody.velocity = velocity;
+      rigidbody.MovePosition(newPosition);
+      rigidbody.MoveRotation(newRotation);
     }
   }
 

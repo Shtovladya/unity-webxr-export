@@ -23,6 +23,8 @@ namespace WebXR
 
     public GameObject[] showGOs;
 
+    public System.Action OnTransformUpdate;
+
     private Matrix4x4 sitStand;
 
     private float trigger;
@@ -168,6 +170,11 @@ namespace WebXR
         buttons[4] = new WebXRControllerButton(buttonA==1, buttonA);
         buttons[5] = new WebXRControllerButton(buttonB==1, buttonB);
         UpdateButtons(buttons);
+
+        if (OnTransformUpdate != null)
+        {
+          OnTransformUpdate();
+        }
       }
     }
 
@@ -223,6 +230,11 @@ namespace WebXR
         buttons[0] = new WebXRControllerButton(trigger==1, trigger);
         buttons[1] = new WebXRControllerButton(squeeze==1, squeeze);
         UpdateButtons(buttons);
+        
+        if (OnTransformUpdate != null)
+        {
+          OnTransformUpdate();
+        }
       }
     }
 

@@ -1272,7 +1272,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4427160273819458}
   - component: {fileID: 54027100335586508}
-  - component: {fileID: 138596338900119798}
   - component: {fileID: 95292425453911886}
   - component: {fileID: 135139238002636258}
   - component: {fileID: 114128207473628304}
@@ -1316,20 +1315,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!138 &138596338900119798
-FixedJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1799026754646168}
-  m_ConnectedBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
 --- !u!95 &95292425453911886
 Animator:
   serializedVersion: 3
@@ -1725,7 +1710,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4446684710817404}
   - component: {fileID: 54413995134380664}
-  - component: {fileID: 138281815166716050}
   - component: {fileID: 95219300520550374}
   - component: {fileID: 135505933631826540}
   - component: {fileID: 114546255618804366}
@@ -1769,20 +1753,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!138 &138281815166716050
-FixedJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1986733487743170}
-  m_ConnectedBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
 --- !u!95 &95219300520550374
 Animator:
   serializedVersion: 3
